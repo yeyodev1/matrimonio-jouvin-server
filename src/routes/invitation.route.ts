@@ -4,7 +4,8 @@ import {
   getAllInvitations,
   getInvitationById,
   updateInvitation,
-  deleteInvitation
+  deleteInvitation,
+  confirmInvitation
 } from "../controllers/invitation.controller";
 
 const router = Router();
@@ -21,7 +22,10 @@ router.get("/:id", getInvitationById);
 // PUT /invitations/:id - Update invitation
 router.put("/:id", updateInvitation);
 
-// DELETE /invitations/:id - Delete invitation
+// DELETE /invitations/:id - Delete invitation by ID
 router.delete("/:id", deleteInvitation);
+
+// PATCH /invitations/:id/confirm - Confirm or unconfirm invitation
+router.patch("/:id/confirm", confirmInvitation);
 
 export default router;
