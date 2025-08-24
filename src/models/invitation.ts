@@ -5,6 +5,7 @@ export interface IInvitation extends Document {
   _id: Types.ObjectId;
   guestName: string;
   numberOfCompanions: number;
+  confirmed: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,6 +24,11 @@ const invitationSchema = new Schema<IInvitation>(
       required: [true, "Number of companions is required"],
       min: [0, "Number of companions cannot be negative"],
       max: [10, "Number of companions cannot exceed 10"]
+    },
+    confirmed: {
+      type: Boolean,
+      default: false,
+      required: true
     }
   },
   {
