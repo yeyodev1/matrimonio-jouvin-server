@@ -189,3 +189,49 @@ export async function deleteInvitation(req: Request, res: Response, next: NextFu
     next(error);
   }
 }
+
+// Confirm invitation
+export async function confirmInvitation(req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const { id } = req.params;
+    const { confirmed } = req.body;
+
+    // Validate ObjectId
+    if (!Types.ObjectId.isValid(id)) {
+      res.status(HttpStatusCode.BadRequest).send({
+        message: "Invalid invitation ID format."
+      });
+      return;
+    }
+
+    // Validate confirmed field
+    if (typeof confirmed !== "boolean") {
+      res.status(HttpStatusCode.BadRequest).send({
+        message: "Confirmed field must be a boolean value."
+      });
+      return;
+    }
+
+    const updatedInvitation = await models.Invitation.findByIdAndUpdate(
+      id,
+      { confirmed },
+      { new: true, runValidators: true }
+    ).lean();
+
+    if (!updatedInvitation) {
+      res.status(HttpStatusCode.NotFound).send({
+        message: "Invitation not found."
+      });
+      return;
+    }
+
+    res.status(HttpStatusCode.Ok).send({
+      message: `Invitation ${confirmed ? "confirmed" : "unconfirmed"} successfully.`,
+      invitation: updatedInvitation
+    });
+    return;
+  } catch (error) {
+    console.error("Error confirming invitation:", error);
+    next(error);
+  }
+}
