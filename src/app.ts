@@ -46,7 +46,7 @@ export default function createApp() {
   app.use(express.json({ limit: "50mb" }));
 
   app.get("/", (_req, res: Response) => {
-    res.send("BAKANO MVP STORYBRAND IS ALIVEEEEEEE:)");
+    res.send("MATRIMONIO SERVER JOUVIN ALIVEEEEEEE:)");
   });
 
   routerApi(app);
