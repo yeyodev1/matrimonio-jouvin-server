@@ -1,21 +1,13 @@
+// src/index.ts
+
 import * as dotenv from "dotenv";
 import createApp from "./app";
-import dbConnect from "./config/mongo";
 
-async function main() {
-  dotenv.config();
+// Carga las variables de entorno
+dotenv.config();
 
-  await dbConnect();
+// Obtenemos la aplicación de Express
+const { app } = createApp();
 
-  const { app, server } = createApp();
-
-  server.timeout = 10 * 60 * 1000;
-
-  const port: number | string = process.env.PORT || 8100;
-
-  server.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-  });
-}
-
-main();
+// Exportamos la 'app'. Esto es lo que Vercel ejecutará.
+export default app;
