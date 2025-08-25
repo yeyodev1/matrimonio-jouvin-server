@@ -14,7 +14,8 @@ export default function createApp() {
     "http://localhost:8100",
     "http://localhost:8080",
     "https://matrimonio-jouvin.netlify.app",
-    "https://chrisantemoygb.love"
+    "https://chrisantemoygb.love",
+    "http://localhost:5173"
   ];
 
   const corsOptions = {
