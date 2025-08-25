@@ -8,6 +8,7 @@ const MONGODB_URI = 'mongodb+srv://dreyes:mA8YM7R02XuUr0MQ@matrimonio-jouvin.fvv
 if (!MONGODB_URI) {
   throw new Error(
     "Please define the DB_URI environment variable inside .env.local"
+    
   );
 }
 
