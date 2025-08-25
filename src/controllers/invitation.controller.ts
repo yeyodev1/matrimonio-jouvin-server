@@ -2,10 +2,12 @@ import type { Request, Response, NextFunction } from "express";
 import { Types } from "mongoose";
 import models from "../models";
 import { HttpStatusCode } from "axios";
+import dbConnect from "../config/mongo";
 
 // Create a new invitation
 export async function createInvitation(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    await dbConnect();
     const { guestName, numberOfCompanions } = req.body;
 
     // Validate required fields
@@ -38,6 +40,7 @@ export async function createInvitation(req: Request, res: Response, next: NextFu
 // Get all invitations with pagination
 export async function getAllInvitations(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    await dbConnect();
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
@@ -76,6 +79,7 @@ export async function getAllInvitations(req: Request, res: Response, next: NextF
 // Get invitation by ID
 export async function getInvitationById(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    await dbConnect();
     const { id } = req.params;
 
     // Validate ObjectId
@@ -109,6 +113,7 @@ export async function getInvitationById(req: Request, res: Response, next: NextF
 // Update invitation
 export async function updateInvitation(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    await dbConnect();
     const { id } = req.params;
     const { guestName, numberOfCompanions } = req.body;
 
@@ -160,6 +165,7 @@ export async function updateInvitation(req: Request, res: Response, next: NextFu
 // Delete invitation
 export async function deleteInvitation(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    await dbConnect();
     const { id } = req.params;
 
     // Validate ObjectId
@@ -193,6 +199,7 @@ export async function deleteInvitation(req: Request, res: Response, next: NextFu
 // Confirm invitation
 export async function confirmInvitation(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
+    await dbConnect();
     const { id } = req.params;
     const { confirmed } = req.body;
 
