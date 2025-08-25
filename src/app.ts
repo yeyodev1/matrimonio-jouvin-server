@@ -13,11 +13,8 @@ export default function createApp() {
   const whitelist = [
     "http://localhost:8100",
     "http://localhost:8080",
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:8101",
-    "https://automatizations.bakano.ec",
-    "https://brand.bakano.ec"
+    "https://matrimonio-jouvin.netlify.app",
+    "https://chrisantemoygb.love"
   ];
 
   const corsOptions = {
